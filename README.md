@@ -1,6 +1,6 @@
 # STELLAR - every astronaut's health, in one place
 
-> NASA Space Apps Challenge prototype: a personal digital twin for astronaut health.
+> NASA Space Apps Challenge prototype: a personal digital twin for astronaut health. 
 
 In space the body's "normal" changes, so one fixed threshold for everyone either misses warnings or raises
 false alarms. STELLAR learns **each astronaut's own normal**, fuses wearable, suit and camera data, scores
