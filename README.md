@@ -114,11 +114,12 @@ for the same three astronauts: Ahmed = Ethan Cole (AST-001), Sara = Emily Carter
 
 | Member | Role |
 |---|---|
-| Abdelrahman Elghandour | Backend Lead: API, database, integration, Ground Control dashboard, demo |
+| Marawan Soliman | Ground Control dashboard, security, backend , Data Research |
+| Abdelrahman Elghandour | Backend Lead: system integration, backend (API, database, alerts), security parts, part of the Ground Control dashboard front end  |
 | Alshimaa Elbhay | AI 1: Digital Twin (personal baselines, synthetic crew data) |
 | Menna Alashqar | AI 2: Risk Prediction (hybrid risk model) |
 | Mariam Dagher | AI 3: Computer Vision and Data Fusion |
-| Marawan Soliman | Security and Ground Control web |
+| Marawan Soliman | Ground Control dashboard, security, backend |
 | Lina Alnawawy | Mobile app and user experience |
 
 ## Data and sources
