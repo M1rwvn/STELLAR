@@ -119,7 +119,6 @@ for the same three astronauts: Ahmed = Ethan Cole (AST-001), Sara = Emily Carter
 | Alshimaa Elbhay | AI 1: Digital Twin (personal baselines, synthetic crew data) |
 | Menna Alashqar | AI 2: Risk Prediction (hybrid risk model) |
 | Mariam Dagher | AI 3: Computer Vision and Data Fusion |
-| Marawan Soliman | Ground Control dashboard, security, backend |
 | Lina Alnawawy | Mobile app and user experience |
 
 ## Data and sources
