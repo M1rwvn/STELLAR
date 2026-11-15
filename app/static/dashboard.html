@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STELLAR Ground Control</title>
+<style>
+/* STELLAR Ground Control. One dark theme on purpose (control rooms run dark). No external files: works offline. */
+:root {
+  --bg: #050607; --card: #0e1013; --card2: #15181d; --line: #22272f; --ink: #f3f5f8; --muted: #8b94a1; --dim: #5a636f;
+  --normal: #1fe39a; --attention: #ffd23f; --high: #ff8a3d; --emergency: #ff3b5c; --accent: #5aa9ff; --track: #1b1f25;
+  --sans: "Segoe UI Variable Display", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.5 var(--sans); }
+body { background: radial-gradient(1200px 600px at 15% -10%, rgba(90, 169, 255, .08), transparent 60%), var(--bg); min-height: 100vh; }
+button { font: inherit; cursor: pointer; }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.num { font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+.label { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
+/* header */
+header { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; padding: 18px 28px; border-bottom: 1px solid var(--line); }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand svg { width: 30px; height: 30px; }
+.brand b { font-size: 22px; font-weight: 800; letter-spacing: .28em; }
+.brand span { color: var(--muted); font-size: 13px; letter-spacing: .08em; }
+.clock { color: var(--muted); font: 13px var(--mono); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-left: auto; }
+.chip { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; padding: 5px 11px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); background: var(--card); }
+.chip i { width: 7px; height: 7px; border-radius: 50%; background: var(--dim); }
+.chip.on i { background: var(--normal); box-shadow: 0 0 8px var(--normal); }
+.chip.off i { background: var(--attention); }
+
+main { display: grid; grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr); gap: 20px; padding: 22px 28px 28px; max-width: 1600px; margin: 0 auto; }
+.col { display: grid; gap: 20px; align-content: start; min-width: 0; }
+.card { background: linear-gradient(180deg, var(--card2), var(--card)); border: 1px solid var(--line); border-radius: 18px; padding: 20px; min-width: 0; }
+.card > .label:first-child { display: block; margin-bottom: 14px; }
+.empty { color: var(--muted); font-size: 13px; }
+.note { color: var(--muted); font-size: 12px; }
+@media (max-width: 1100px) { main { grid-template-columns: 1fr; padding: 16px; } header { padding: 14px 16px; } }
+
+/* level colours */
+.lv-Normal { --c: var(--normal); } .lv-Attention { --c: var(--attention); } .lv-HighRisk { --c: var(--high); } .lv-Emergency { --c: var(--emergency); }
+.fl-Low { --c: var(--normal); } .fl-Medium { --c: var(--attention); } .fl-High { --c: var(--emergency); }
+
+/* rings */
+.ring { position: relative; display: grid; place-items: center; }
+.ring svg { display: block; transform: rotate(-90deg); overflow: visible; }
+.ring .trk { fill: none; stroke: var(--track); }
+.ring .arc { fill: none; stroke: var(--c, var(--accent)); stroke-linecap: round; filter: drop-shadow(0 0 6px var(--c, var(--accent)));
+  transition: stroke-dashoffset .8s cubic-bezier(.2, .8, .2, 1), stroke .4s; }
+.ring .mid { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
+.ring .val { font-weight: 800; line-height: 1; color: var(--ink); }
+.ring .unit { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+
+/* crew */
+.crew { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+.astro { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 16px; text-align: left; color: var(--ink);
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; transition: border-color .2s, transform .2s; }
+.astro:hover { transform: translateY(-1px); border-color: #313844; }
+.astro.sel { border-color: var(--c); box-shadow: 0 0 0 1px var(--c) inset, 0 8px 30px -12px var(--c); }
+.astro .name { font-size: 18px; font-weight: 700; }
+.astro .lvl { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--c); }
+.astro .sub { color: var(--muted); font-size: 12px; margin-top: 4px; }
+.astro.lv-Emergency .ring .arc { animation: pulse 1.8s ease-in-out infinite; }
+@keyframes pulse { 50% { filter: drop-shadow(0 0 14px var(--c)); } }
+@media (prefers-reduced-motion: reduce) { .astro.lv-Emergency .ring .arc, .ring .arc { animation: none; transition: none; } }
+
+/* focus */
+.focus-top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; margin-bottom: 18px; }
+.focus-top .who { font-size: 26px; font-weight: 800; }
+.focus-top .who span { color: var(--muted); font-weight: 400; font-size: 15px; margin-left: 8px; }
+.rings3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; justify-items: center; padding: 6px 0 18px; border-bottom: 1px solid var(--line); }
+.rings3 .cap { margin-top: 10px; text-align: center; }
+.rings3 .cap b { display: block; font-size: 13px; color: var(--c, var(--ink)); }
+.why { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 10px; }
+.why li { display: grid; grid-template-columns: 4px 1fr; gap: 12px; align-items: stretch; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px 12px 0; }
+.why li::before { content: ""; border-radius: 0 4px 4px 0; background: var(--c, var(--accent)); }
+.rec { margin-top: 12px; padding: 14px 16px; border-radius: 12px; background: rgba(90, 169, 255, .08); border: 1px solid rgba(90, 169, 255, .25); }
+.rec .label { color: var(--accent); }
+.factors { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.factor { font: 12px var(--mono); padding: 4px 10px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); color: var(--muted); }
+.factor b { color: var(--ink); }
+
+/* tiles */
+.halves { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 760px) { .halves, .rings3 { grid-template-columns: 1fr; } }
+.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tile { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+.tile .v { font-size: 20px; font-weight: 700; margin-top: 2px; }
+.tile .v small { font-size: 12px; color: var(--muted); font-weight: 400; margin-left: 4px; }
+.tile .est { color: var(--attention); font-size: 11px; }
+.tile .rng { color: var(--dim); font-size: 12px; }
+.tile.out { border-color: rgba(255, 59, 92, .55); }
+.tile.out .v { color: var(--emergency); }
+.rings3 .cap .note { display: block; margin-top: 2px; }
+.bars { display: grid; gap: 12px; margin-top: 14px; }
+.bar { height: 8px; border-radius: 4px; background: var(--track); overflow: hidden; margin-top: 6px; }
+.bar i { display: block; height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--accent), var(--normal)); transition: width .8s; }
+.bar.inv i { background: linear-gradient(90deg, var(--normal), var(--attention) 55%, var(--emergency)); }
+.barrow { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+.barrow b { color: var(--ink); font-weight: 600; }
+.flag { margin-top: 10px; padding: 10px 12px; border-radius: 10px; background: rgba(255, 59, 92, .1); border: 1px solid rgba(255, 59, 92, .4); font-size: 13px; }
+
+/* chart */
+.chart { width: 100%; height: auto; display: block; }
+
+/* alerts + link */
+.alert { border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--c, var(--line)); }
+.alert.acked { opacity: .45; }
+.alert .top { display: flex; justify-content: space-between; gap: 8px; }
+.alert .top .label { color: var(--c); }
+.alert .msg { margin: 6px 0 10px; overflow-wrap: anywhere; font-size: 13px; }
+.sev-critical { --c: var(--emergency); } .sev-high { --c: var(--high); } .sev-medium { --c: var(--attention); } .sev-low { --c: var(--muted); }
+.btn { background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 5px 14px; font-size: 13px; }
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn.warn { border-color: rgba(255, 138, 61, .6); color: var(--high); }
+.link-state { display: flex; align-items: center; gap: 10px; font-size: 13px; margin-bottom: 12px; }
+.link-state i { width: 9px; height: 9px; border-radius: 50%; background: var(--normal); box-shadow: 0 0 10px var(--normal); }
+.link-state.down i { background: var(--high); box-shadow: 0 0 10px var(--high); }
+.sw-top { display: flex; align-items: center; gap: 18px; }
+.sw-top .facts { display: grid; gap: 6px; font-size: 13px; }
+.sw-top .facts b { font-size: 15px; }
+.pill { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; color: #050607; background: var(--c); }
+.kpbars { width: 100%; height: 56px; display: block; margin-top: 14px; }
+.events { margin-top: 10px; display: grid; gap: 6px; font-size: 12px; }
+.events div { display: grid; grid-template-columns: 38px 92px 1fr; gap: 8px; color: var(--muted); }
+.events b { color: var(--ink); font-weight: 600; }
+.feed { font: 12px var(--mono); max-height: 260px; overflow: auto; margin-top: 12px; }
+.feed div { display: flex; gap: 10px; padding: 4px 0; border-bottom: 1px dashed var(--line); }
+.feed .st { color: var(--dim); min-width: 66px; }
+footer { padding: 0 28px 24px; color: var(--dim); font-size: 12px; max-width: 1600px; margin: 0 auto; }
+#login { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(0, 0, 0, .85); }
+#login[hidden] { display: none; }
+#login form { background: var(--card2); border: 1px solid var(--line); border-radius: 16px; padding: 24px; display: grid; gap: 12px; width: 320px; }
+#login input { background: var(--card); color: var(--ink); border: 1px solid var(--line); border-radius: 10px; padding: 10px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5aa9ff"/><stop offset="1" stop-color="#1fe39a"/></linearGradient></defs>
+      <path d="M16 2 L19.2 12.8 L30 16 L19.2 19.2 L16 30 L12.8 19.2 L2 16 L12.8 12.8 Z" fill="url(#g)"/></svg>
+    <b>STELLAR</b><span>GROUND CONTROL</span>
+  </div>
+  <div class="clock" id="clock">—</div>
+  <div class="chips" id="chips"><span class="chip">connecting…</span></div>
+</header>
+
+<main>
+  <div class="col">
+    <section class="card">
+      <span class="label">Crew</span>
+      <div class="crew" id="crew"><p class="empty">Waiting for the first readings. Start the live data (replay) to see the crew.</p></div>
+    </section>
+
+    <section class="card" id="focus">
+      <span class="label">Selected astronaut</span>
+      <p class="empty">Select an astronaut above.</p>
+    </section>
+
+    <section class="card">
+      <span class="label">Health risk over time <span id="chartWho"></span></span>
+      <svg class="chart" id="chart" viewBox="0 0 800 240" role="img" aria-label="Health risk over time"></svg>
+    </section>
+
+    <div class="halves">
+      <section class="card">
+        <span class="label">Vitals vs personal normal <span id="rangeWho"></span></span>
+        <div class="tiles" id="ranges"><p class="empty">Select an astronaut</p></div>
+        <p class="note" style="margin:12px 0 0">Digital Twin: this astronaut's own normal, learned on mission days 1–14.</p>
+      </section>
+      <section class="card">
+        <span class="label">Suit &amp; camera · data fusion <span id="fusionWho"></span></span>
+        <div id="fusion"><p class="empty">Select an astronaut</p></div>
+      </section>
+    </div>
+  </div>
+
+  <div class="col">
+    <section class="card">
+      <span class="label">Alerts · emergency first</span>
+      <div id="alerts"><p class="empty">No alerts yet.</p></div>
+    </section>
+    <section class="card">
+      <span class="label">Space weather · NASA data</span>
+      <div id="sw"><p class="empty">Loading NASA space weather…</p></div>
+    </section>
+    <section class="card">
+      <span class="label">Space-to-ground link</span>
+      <div class="link-state" id="link"><i></i><span>—</span></div>
+      <button class="btn warn" id="blackout" type="button">Simulate 20 s loss of signal</button>
+      <div class="feed" id="feed"></div>
+    </section>
+  </div>
+</main>
+<footer>STELLAR · crew data synthetic · space weather: real NASA data (OMNIWeb, DONKI) · monitoring indicators, not diagnoses · refreshes every 2 s</footer>
+
+<div id="login" hidden>
+  <form id="loginForm">
+    <strong>Ground Control login</strong>
+    <input id="u" value="ground" autocomplete="username" aria-label="username">
+    <input id="p" type="password" placeholder="password" autocomplete="current-password" aria-label="password">
+    <button class="btn" type="submit">Log in</button>
+    <span class="note" id="loginErr"></span>
+  </form>
+</div>
+
+<script>
+"use strict";
+const COLORS = { "Normal": "#1fe39a", "Attention": "#ffd23f", "High Risk": "#ff8a3d", "Emergency": "#ff3b5c" };
+const LABEL = { hr: ["Heart rate", "bpm"], hrv: ["HRV", "ms"], spo2: ["SpO2", "%"], temp: ["Temperature", "°C"],
+  sleep_hours: ["Sleep", "h"], activity: ["Activity", "0–1"], resp_rate: ["Breathing", "/min"] };
+const SUIT = { cabin_pressure_kpa: ["Cabin pressure", "kPa"], suit_temp_c: ["Suit temp", "°C"], o2_pct: ["Oxygen", "%"], co2_pct: ["CO2", "%"] };
+const NS = "http://www.w3.org/2000/svg";
+let token = null, selected = null, crewRisk = {};
+const $ = (id) => document.getElementById(id);
+const lvClass = (lv) => "lv-" + String(lv || "").replace(" ", "");
+function el(tag, attrs = {}, ...kids) {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") n.className = v; else if (k === "text") n.textContent = v; else n.setAttribute(k, v);
+  }
+  for (const k of kids) if (k != null) n.append(k);
+  return n;
+}
+function svg(tag, a = {}, text) {
+  const n = document.createElementNS(NS, tag);
+  for (const k in a) n.setAttribute(k, a[k]);
+  if (text != null) n.textContent = text;
+  return n;
+}
+/* Ring gauge: value 0-100, coloured by the CSS --c of its parent class. */
+function ring(value, size, stroke, big, unit, cls) {
+  const r = (size - stroke) / 2, c = 2 * Math.PI * r, v = Math.max(0, Math.min(100, value ?? 0));
+  const s = svg("svg", { width: size, height: size, viewBox: `0 0 ${size} ${size}` });
+  s.append(svg("circle", { class: "trk", cx: size / 2, cy: size / 2, r, "stroke-width": stroke }));
+  s.append(svg("circle", { class: "arc", cx: size / 2, cy: size / 2, r, "stroke-width": stroke,
+    "stroke-dasharray": c.toFixed(1), "stroke-dashoffset": (c * (1 - v / 100)).toFixed(1) }));
+  return el("div", { class: "ring " + (cls || "") }, s,
+    el("div", { class: "mid" }, el("div", { class: "val num", style: `font-size:${Math.round(size * .3)}px`, text: big }),
+      unit ? el("div", { class: "unit", text: unit }) : null));
+}
+const sleepClass = (v) => v == null ? "" : v >= 85 ? "lv-Normal" : v >= 70 ? "lv-Attention" : "lv-Emergency";
+const sleepWord = (v) => v == null ? "–" : v >= 85 ? "Well rested" : v >= 70 ? "Short sleep" : "Sleep debt";
+
+async function login(user, pass) {
+  const r = await fetch("/login", { method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username: user, password: pass }) });
+  if (!r.ok) throw new Error((await r.json()).detail || r.status);
+  token = (await r.json()).access_token;
+}
+async function api(path, opts = {}) {
+  const r = await fetch(path, { ...opts, headers: { "Content-Type": "application/json",
+    Authorization: "Bearer " + token, ...(opts.headers || {}) } });
+  if (r.status === 401) { token = null; $("login").hidden = false; throw new Error("auth"); }
+  if (r.status === 404) return null;
+  if (!r.ok) throw new Error(path + " " + r.status);
+  return r.json();
+}
+
+async function refreshChips() {
+  const h = await (await fetch("/health")).json();
+  const chips = [el("span", { class: "chip " + (h.status === "ok" ? "on" : "off") }, el("i"), "API")];
+  const names = { digital_twin: "Digital Twin", fusion: "Data Fusion", risk: "Risk Model" };
+  for (const [k, v] of Object.entries(h.ai || {}))
+    chips.push(el("span", { class: "chip " + (v === "real" ? "on" : "off"), title: v === "real" ? "live" : "backup" }, el("i"), names[k] || k));
+  $("chips").replaceChildren(...chips);
+}
+
+async function refreshCrew() {
+  const crew = await api("/crew");
+  if (!crew.some((m) => m.risk_score != null)) return;
+  if (!selected) selected = (crew.find((m) => m.level === "Emergency") || crew[0]).astronaut_id;
+  const risks = await Promise.all(crew.map((m) => m.risk_score != null ? api("/risk-score/" + m.astronaut_id) : null));
+  crew.forEach((m, i) => { crewRisk[m.astronaut_id] = risks[i]; });
+  const latest = crew.map((m) => m.last_update).filter(Boolean).sort().pop();
+  if (latest) $("clock").textContent = "MISSION DAY " + Math.max(...crew.map((m) => m.mission_day)) + " · " + latest.slice(0, 16).replace("T", " ") + " UTC";
+  $("crew").replaceChildren(...crew.map((m) => {
+    const fus = (crewRisk[m.astronaut_id] || {}).fusion || {};
+    const card = el("button", { type: "button", class: "astro " + lvClass(m.level) + (m.astronaut_id === selected ? " sel" : "") },
+      ring(m.risk_score, 92, 9, m.risk_score ?? "–", "risk"),
+      el("div", {}, el("div", { class: "name", text: m.name }), el("div", { class: "lvl", text: m.level || "no data" }),
+        el("div", { class: "sub", text: "Day " + m.mission_day + (fus.fatigue_level ? " · fatigue " + fus.fatigue_level.toLowerCase() : "")
+          + (m.open_alerts ? " · " + m.open_alerts + " alert" + (m.open_alerts > 1 ? "s" : "") : "") })));
+    card.onclick = () => { selected = m.astronaut_id; refreshCrew(); refreshFocus(); };
+    return card;
+  }));
+}
+
+async function refreshFocus() {
+  if (!selected) return;
+  const [risk, prof, hist] = await Promise.all([api("/risk-score/" + selected), api("/astronaut-profile/" + selected),
+    api("/risk-history/" + selected + "?limit=2000")]);
+  if (!risk || !prof) return;
+  const ex = risk.explanation || { reasons: [], summary: {}, recommendation: {} };
+  const fus = risk.fusion || {};
+  const fatigue = fus.vision && fus.vision.fatigue_indicator != null ? Math.round(fus.vision.fatigue_indicator * 100) : null;
+  const vit = fus.vitals || {};
+  const need = typeof prof.baseline.sleep_hours === "number" ? prof.baseline.sleep_hours : null;
+  const sleepPct = vit.sleep_hours != null && need ? Math.min(100, Math.round(vit.sleep_hours / need * 100)) : null;
+  const reasons = ex.reasons.length ? ex.reasons.map((r) => r.text.en) : [(ex.summary || {}).en || "All values within this astronaut's normal pattern."];
+  $("focus").replaceChildren(
+    el("div", { class: "focus-top" },
+      el("div", { class: "who" }, prof.name, el("span", { text: prof.astronaut_id + " · mission day " + prof.mission_day })),
+      el("span", { class: "label", text: "Updated " + risk.timestamp.slice(0, 16).replace("T", " ") + " UTC" })),
+    el("div", { class: "rings3" },
+      el("div", { class: lvClass(risk.level) }, ring(risk.risk_score, 168, 14, risk.risk_score, "health risk"),
+        el("div", { class: "cap" }, el("b", { text: risk.level }))),
+      el("div", { class: sleepClass(sleepPct) }, ring(sleepPct, 168, 14, sleepPct != null ? sleepPct + "%" : "–", "sleep"),
+        el("div", { class: "cap" }, el("b", { text: sleepWord(sleepPct) }),
+          el("span", { class: "note", text: vit.sleep_hours != null && need ? vit.sleep_hours.toFixed(1) + " h of " + need.toFixed(1) + " h normal" : "" }))),
+      el("div", { class: "fl-" + (fus.fatigue_level || "Low") }, ring(fatigue, 168, 14, fatigue != null ? fatigue : "–", "fatigue"),
+        el("div", { class: "cap" }, el("b", { text: (fus.fatigue_level || "–") + " fatigue" })))),
+    el("span", { class: "label", style: "display:block;margin-top:18px", text: "Why · compared with this astronaut's own normal" }),
+    el("ul", { class: "why " + lvClass(risk.level) }, ...reasons.map((t) => el("li", {}, el("span", { text: t })))),
+    el("div", { class: "rec" }, el("div", { class: "label", text: "Recommendation" }),
+      el("div", { style: "margin-top:4px", text: (ex.recommendation || {}).en || risk.recommendation })),
+    el("div", { class: "factors" }, ...risk.top_factors.map((f) =>
+      el("span", { class: "factor" }, f.feature + " ", el("b", { text: (f.change_pct > 0 ? "+" : "") + f.change_pct + "%" })))));
+  $("rangeWho").textContent = "· " + prof.name;
+  $("ranges").replaceChildren(...Object.entries(prof.baseline).filter(([k]) => LABEL[k]).map(([k, v]) => {
+    const now = vit[k], range = Array.isArray(v);
+    const out = range && now != null && (now < v[0] || now > v[1]);
+    return el("div", { class: "tile" + (out ? " out" : "") }, el("div", { class: "label", text: LABEL[k][0] }),
+      el("div", { class: "v num" }, now != null ? (+now).toFixed(k === "activity" ? 2 : 1) : "–", el("small", { text: LABEL[k][1] })),
+      el("div", { class: "rng num", text: "normal " + (range ? v[0].toFixed(1) + "–" + v[1].toFixed(1) : String(v)) }));
+  }));
+  $("chartWho").textContent = "· " + prof.name;
+  drawFusion(fus, prof.name);
+  drawChart(hist ? hist.points : []);
+}
+
+function drawFusion(f, name) {
+  $("fusionWho").textContent = "· " + name;
+  if (!f || !f.suit) { $("fusion").replaceChildren(el("p", { class: "empty", text: "No fused data yet" })); return; }
+  const est = new Set(f.imputed || []);
+  const tiles = el("div", { class: "tiles" }, ...Object.entries(SUIT).map(([k, [label, unit]]) =>
+    el("div", { class: "tile" }, el("div", { class: "label", text: label }),
+      el("div", { class: "v num" }, f.suit[k] == null ? "–" : String(f.suit[k]), el("small", { text: unit })),
+      est.has(k) ? el("div", { class: "est", text: "estimated" }) : null)));
+  const bar = (label, v, inv, k) => el("div", {},
+    el("div", { class: "barrow" }, el("span", { text: label + (est.has(k) ? " (estimated)" : "") }), el("b", { class: "num", text: v == null ? "–" : v.toFixed(2) })),
+    el("div", { class: "bar" + (inv ? " inv" : "") }, el("i", { style: "width:" + Math.round((v || 0) * 100) + "%" })));
+  const flags = (f.environment_flags || []).map((x) => el("div", { class: "flag", text: x.text }));
+  $("fusion").replaceChildren(tiles,
+    el("div", { class: "bars" }, bar("Posture", f.vision.posture_score, false, "posture_score"),
+      bar("Movement quality", f.vision.movement_quality, false, "movement_quality"),
+      bar("Fatigue on camera", f.vision.fatigue_indicator, true, "fatigue_indicator")), ...flags);
+}
+
+function drawChart(points) {
+  const s = $("chart"), W = 800, H = 240, L = 10, R = 40, T = 10, B = 26;
+  const y = (v) => T + (100 - v) / 100 * (H - T - B);
+  const kids = [];
+  const defs = svg("defs");
+  const last = points[points.length - 1];
+  const col = last ? COLORS[last.level] : "#5aa9ff";
+  const grad = svg("linearGradient", { id: "fill", x1: 0, y1: 0, x2: 0, y2: 1 });
+  grad.append(svg("stop", { offset: 0, "stop-color": col, "stop-opacity": 0.35 }), svg("stop", { offset: 1, "stop-color": col, "stop-opacity": 0 }));
+  defs.append(grad); kids.push(defs);
+  [[25, "Normal"], [50, "Attention"], [75, "High Risk"]].forEach(([v, lv]) => {
+    kids.push(svg("line", { x1: L, x2: W - R, y1: y(v), y2: y(v), stroke: "#22272f", "stroke-dasharray": "4 6" }));
+    kids.push(svg("text", { x: W - R + 6, y: y(v) + 4, fill: "#5a636f", "font-size": 11 }, v));
+  });
+  if (points.length > 1) {
+    const t0 = Date.parse(points[0].timestamp), t1 = Date.parse(last.timestamp);
+    const x = (t) => L + (Date.parse(t) - t0) / Math.max(1, t1 - t0) * (W - L - R);
+    const pts = points.map((p) => [x(p.timestamp), y(p.risk_score)]);
+    const line = "M" + pts.map((p) => p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" L");
+    kids.push(svg("path", { d: line + ` L${pts[pts.length - 1][0].toFixed(1)},${y(0)} L${pts[0][0].toFixed(1)},${y(0)} Z`, fill: "url(#fill)" }));
+    kids.push(svg("path", { d: line, fill: "none", stroke: col, "stroke-width": 2.2, "stroke-linejoin": "round", "stroke-linecap": "round" }));
+    const [lx, ly] = pts[pts.length - 1];
+    kids.push(svg("circle", { cx: lx, cy: ly, r: 9, fill: col, opacity: 0.25 }), svg("circle", { cx: lx, cy: ly, r: 4.5, fill: col }));
+    const fmt = (t) => new Date(t).toISOString().slice(5, 10);
+    kids.push(svg("text", { x: L, y: H - 6, fill: "#5a636f", "font-size": 11 }, fmt(points[0].timestamp)));
+    kids.push(svg("text", { x: W - R, y: H - 6, fill: "#5a636f", "font-size": 11, "text-anchor": "end" }, fmt(last.timestamp)));
+  } else {
+    kids.push(svg("text", { x: W / 2, y: H / 2, fill: "#8b94a1", "font-size": 13, "text-anchor": "middle" }, "Waiting for readings…"));
+  }
+  s.replaceChildren(...kids);
+}
+
+const gClass = (g) => !g || g === "G0" ? "lv-Normal" : g <= "G2" ? "lv-Attention" : g === "G3" ? "lv-HighRisk" : "lv-Emergency";
+async function refreshSpaceWeather() {
+  const w = await api("/space-weather");
+  if (!w) return;
+  const g = w.geomagnetic || {}, rad = w.radiation || {};
+  const kpPct = w.kp == null ? null : Math.round(w.kp / 9 * 100);
+  const bars = svg("svg", { class: "kpbars", viewBox: "0 0 336 56", preserveAspectRatio: "none" });
+  w.kp_last_7_days.forEach((h, i) => {
+    if (h.kp == null) return;
+    const ht = Math.max(1.5, h.kp / 9 * 52);
+    const c = h.kp >= 7.67 ? "#ff3b5c" : h.kp >= 6.67 ? "#ff8a3d" : h.kp >= 4.67 ? "#ffd23f" : "#1fe39a";
+    bars.append(svg("rect", { x: i * 2, y: 56 - ht, width: 1.6, height: ht, fill: c, opacity: 0.9 }));
+  });
+  const events = el("div", { class: "events" }, ...w.recent_events.slice(0, 4).map((e) =>
+    el("div", {}, el("b", { text: e.kind }), el("span", { class: "num", text: e.time.slice(0, 16).replace("T", " ") }), el("span", { text: e.detail }))));
+  $("sw").replaceChildren(...[
+    el("div", { class: "sw-top" },
+      el("div", { class: gClass(g.level) }, ring(kpPct, 104, 10, w.kp == null ? "–" : w.kp.toFixed(1), "Kp")),
+      el("div", { class: "facts" },
+        el("div", { class: gClass(g.level) }, el("span", { class: "pill", text: (g.level || "–") + " · " + (g.label || "") })),
+        el("div", {}, "Dst ", el("b", { class: "num", text: w.dst_nt == null ? "–" : w.dst_nt + " nT" })),
+        el("div", { class: rad.active ? (rad.level === "severe" ? "lv-Emergency" : "lv-HighRisk") : "lv-Normal" },
+          el("span", { class: "pill", text: rad.active ? "Radiation storm" : "No radiation storm" })))),
+    rad.active ? el("div", { class: "flag", text: rad.text }) : null,
+    bars, el("div", { class: "note", text: "Kp, last 7 days" }), events,
+    el("p", { class: "note", style: "margin:10px 0 0", text: "Real NASA data (OMNIWeb + DONKI) for " + w.nasa_time.slice(0, 10)
+      + ", replayed as mission day " + w.mission_day + "." })].filter(Boolean));
+}
+
+async function refreshAlerts() {
+  const alerts = await api("/alerts?limit=12");
+  if (!alerts.length) return;
+  $("alerts").replaceChildren(...alerts.map((a) => {
+    const btn = a.acknowledged ? el("span", { class: "note", text: "Acknowledged" })
+      : el("button", { class: "btn", type: "button", text: "Acknowledge" });
+    if (!a.acknowledged) btn.onclick = async () => { btn.disabled = true; await api("/alerts/" + a.id + "/ack", { method: "POST" }); refreshAlerts(); refreshCrew(); };
+    return el("div", { class: "alert sev-" + a.severity + (a.acknowledged ? " acked" : "") },
+      el("div", { class: "top" }, el("span", { class: "label", text: a.type.replace("_", " ") + " · " + a.severity }), el("span", { class: "note", text: "#" + a.id })),
+      el("div", { class: "msg", text: a.message }), btn);
+  }));
+}
+
+async function refreshLink() {
+  const s = await api("/comm/status?limit=12");
+  $("link").className = "link-state" + (s.blackout ? " down" : "");
+  $("link").replaceChildren(el("i"), el("span", { text: (s.blackout ? "Loss of signal until " + s.blackout_until.slice(11, 19) + " UTC · " : "Link up · ")
+    + "delay " + s.delay_seconds + " s · queued " + s.queued_count }));
+  const rows = [...s.queued.map((m) => ["queued", m]), ...s.sent.map((m) => [m.state, m])].slice(0, 14);
+  $("feed").replaceChildren(...rows.map(([st, m]) => el("div", {},
+    el("span", { class: "st", text: st }), el("span", { style: "color:" + (COLORS[m.level] || "inherit"), text: m.level }),
+    el("span", { text: (m.astronaut_id || "") + " " + m.kind }))));
+}
+
+$("blackout").onclick = async () => { await api("/comm/blackout", { method: "POST", body: JSON.stringify({ seconds: 20 }) }); refreshLink(); };
+$("loginForm").onsubmit = async (e) => {
+  e.preventDefault();
+  try { await login($("u").value, $("p").value); $("login").hidden = true; tick(); }
+  catch (err) { $("loginErr").textContent = "Login failed: " + err.message; }
+};
+
+async function tick() {
+  if (!token) return;
+  try { await Promise.all([refreshChips(), refreshCrew(), refreshAlerts(), refreshLink(), refreshSpaceWeather()]); await refreshFocus(); }
+  catch (e) { if (e.message !== "auth") console.warn(e); }
+}
+(async () => {
+  try { await login("ground", "astro123"); } catch { $("login").hidden = false; return; }
+  tick();
+  setInterval(tick, 2000);
+})();
+</script>
+</body>
+</html>

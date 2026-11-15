@@ -1,0 +1,38 @@
+[
+ {
+  "gstID": "2024-08-28T00:00:00-GST-001",
+  "startTime": "2024-08-28T00:00Z",
+  "kpMax": 5.67,
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/GST/33032/-1"
+ },
+ {
+  "gstID": "2024-09-12T09:00:00-GST-001",
+  "startTime": "2024-09-12T09:00Z",
+  "kpMax": 7.0,
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/GST/33346/-1"
+ },
+ {
+  "gstID": "2024-09-13T21:00:00-GST-001",
+  "startTime": "2024-09-13T21:00Z",
+  "kpMax": 6.0,
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/GST/33413/-1"
+ },
+ {
+  "gstID": "2024-09-17T00:00:00-GST-001",
+  "startTime": "2024-09-17T00:00Z",
+  "kpMax": 7.67,
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/GST/33465/-1"
+ },
+ {
+  "gstID": "2024-10-07T12:00:00-GST-001",
+  "startTime": "2024-10-07T12:00Z",
+  "kpMax": 7.33,
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/GST/33817/-1"
+ },
+ {
+  "gstID": "2024-10-10T15:00:00-GST-001",
+  "startTime": "2024-10-10T15:00Z",
+  "kpMax": 8.67,
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/GST/33913/-1"
+ }
+]

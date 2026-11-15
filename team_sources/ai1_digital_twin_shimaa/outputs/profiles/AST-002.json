@@ -1,0 +1,170 @@
+{
+  "astronaut_id": "AST-002",
+  "name": "Sara",
+  "baseline": {
+    "hr": [
+      59.377,
+      72.423
+    ],
+    "hrv": [
+      44.848,
+      70.052
+    ],
+    "spo2": [
+      95.914,
+      98.286
+    ],
+    "sleep_hours": 7.24,
+    "temp": [
+      36.245,
+      37.015
+    ],
+    "activity": 0.49
+  },
+  "recovery_score": 77,
+  "baseline_detail": {
+    "hr": {
+      "center": 65.9,
+      "low": 59.377,
+      "high": 72.423,
+      "robust_sigma": 3.2617,
+      "interval_method": "median_mad",
+      "n_samples": 336,
+      "min_samples_required": 168,
+      "unit": "bpm",
+      "status": "ok"
+    },
+    "hrv": {
+      "center": 57.45,
+      "low": 44.848,
+      "high": 70.052,
+      "robust_sigma": 6.3011,
+      "interval_method": "median_mad",
+      "n_samples": 336,
+      "min_samples_required": 168,
+      "unit": "ms",
+      "status": "ok"
+    },
+    "spo2": {
+      "center": 97.1,
+      "low": 95.914,
+      "high": 98.286,
+      "robust_sigma": 0.593,
+      "interval_method": "median_mad",
+      "n_samples": 336,
+      "min_samples_required": 168,
+      "unit": "%",
+      "status": "ok"
+    },
+    "resp_rate": {
+      "center": 15.1,
+      "low": 13.024,
+      "high": 17.176,
+      "robust_sigma": 1.0378,
+      "interval_method": "median_mad",
+      "n_samples": 336,
+      "min_samples_required": 168,
+      "unit": "breaths/min",
+      "status": "ok"
+    },
+    "temp": {
+      "center": 36.63,
+      "low": 36.245,
+      "high": 37.015,
+      "robust_sigma": 0.1927,
+      "interval_method": "median_mad",
+      "n_samples": 336,
+      "min_samples_required": 168,
+      "unit": "degC",
+      "status": "ok"
+    },
+    "activity": {
+      "center": 0.49,
+      "low": 0.0,
+      "high": 1.0,
+      "robust_sigma": 0.2654,
+      "interval_method": "median_mad",
+      "n_samples": 336,
+      "min_samples_required": 168,
+      "unit": "score 0-1",
+      "status": "ok"
+    },
+    "stress_score": {
+      "center": 25.875,
+      "low": 4.789,
+      "high": 46.962,
+      "robust_sigma": 10.5432,
+      "interval_method": "median_mad",
+      "n_samples": 323,
+      "min_samples_required": 168,
+      "unit": "score 0-100",
+      "status": "ok"
+    },
+    "sleep_hours": {
+      "center": 7.24,
+      "low": 6.543,
+      "high": 7.937,
+      "robust_sigma": 0.3484,
+      "interval_method": "median_mad",
+      "n_samples": 14,
+      "min_samples_required": 7,
+      "unit": "hours/day",
+      "status": "ok"
+    },
+    "sleep_quality": {
+      "center": 0.779,
+      "low": 0.629,
+      "high": 0.929,
+      "robust_sigma": 0.0749,
+      "interval_method": "median_mad",
+      "n_samples": 14,
+      "min_samples_required": 7,
+      "unit": "score 0-1",
+      "status": "ok"
+    },
+    "exercise_score": {
+      "center": 82.9,
+      "low": 74.894,
+      "high": 90.906,
+      "robust_sigma": 4.003,
+      "interval_method": "median_mad",
+      "n_samples": 14,
+      "min_samples_required": 7,
+      "unit": "score 0-100",
+      "status": "ok"
+    }
+  },
+  "calibration": {
+    "calibration_days": 14,
+    "start": "2026-08-25T00:00:00Z",
+    "end": "2026-09-07T23:00:00Z",
+    "n_rows": 336,
+    "n_days_present": 14,
+    "complete": true,
+    "note": "Only mission days 1..calibration_days were used; later data was ignored."
+  },
+  "online_reference": {
+    "schema_version": "1.1.0",
+    "mission_start": "2026-08-25T00:00:00Z",
+    "calibration_days": 14,
+    "stress": {
+      "hr6_mean": 65.86988023952097,
+      "hr6_scale": 2.4113655473123194,
+      "hrv6_mean": 58.09590818363273,
+      "hrv6_scale": 5.523294156137391
+    },
+    "feature_config": {
+      "rolling_short_hours": 24,
+      "rolling_long_hours": 168,
+      "rolling_min_periods": 6,
+      "stress_window_hours": 6,
+      "stress_baseline_level": 25.0,
+      "stress_gain": 12.5,
+      "sleep_need_hours": 8.0,
+      "sleep_debt_window_days": 7
+    }
+  },
+  "schema_version": "1.1.0",
+  "synthetic": true,
+  "data_label": "SYNTHETIC DATA - fictional astronaut. Baseline is a monitoring reference, not a medical reference interval or diagnosis."
+}

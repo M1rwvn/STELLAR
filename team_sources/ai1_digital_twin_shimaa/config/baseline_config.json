@@ -1,0 +1,28 @@
+{
+  "baseline": {
+    "calibration_days": 14,
+    "central_statistic": "median",
+    "default_interval_method": "median_mad",
+    "interval_method_overrides": {},
+    "dispersion_k": 2.0,
+    "min_hourly_samples": 168,
+    "min_daily_samples": 7,
+    "constant_tolerance": 1e-9
+  },
+  "cleaning": {
+    "max_ffill_hours": 3,
+    "max_ffill_hours_daily_features": 24,
+    "duplicate_keep": "first",
+    "drop_unrecoverable": true
+  },
+  "feature_engineering": {
+    "rolling_short_hours": 24,
+    "rolling_long_hours": 168,
+    "rolling_min_periods": 6,
+    "stress_window_hours": 6,
+    "stress_min_calibration_obs": 12,
+    "sleep_need_hours": 8.0,
+    "sleep_debt_window_days": 7
+  },
+  "deviation": {"pct_excluded_features": ["temp"]}
+}

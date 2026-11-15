@@ -1,0 +1,270 @@
+{
+  "data": "features_all_astronauts.csv",
+  "rows": 10990,
+  "label_shares": {
+    "0": 0.8995,
+    "1": 0.0895,
+    "3": 0.0109
+  },
+  "time_split_val_RF_only": {
+    "macro_f1": 0.458,
+    "per_level_recall": {
+      "Normal": 0.999,
+      "Attention": 0.761,
+      "High Risk": null,
+      "Emergency": null
+    },
+    "support": {
+      "Normal": 1320,
+      "Attention": 330,
+      "High Risk": 0,
+      "Emergency": 0
+    },
+    "confusion_matrix": [
+      [
+        1319,
+        1,
+        0,
+        0
+      ],
+      [
+        79,
+        251,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "time_split_val_hybrid": {
+    "macro_f1": 0.409,
+    "per_level_recall": {
+      "Normal": 1.0,
+      "Attention": 0.527,
+      "High Risk": null,
+      "Emergency": null
+    },
+    "support": {
+      "Normal": 1320,
+      "Attention": 330,
+      "High Risk": 0,
+      "Emergency": 0
+    },
+    "confusion_matrix": [
+      [
+        1320,
+        0,
+        0,
+        0
+      ],
+      [
+        156,
+        174,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "time_split_test_RF_only": {
+    "macro_f1": 0.419,
+    "per_level_recall": {
+      "Normal": 0.991,
+      "Attention": 0.773,
+      "High Risk": null,
+      "Emergency": 0.0
+    },
+    "support": {
+      "Normal": 1200,
+      "Attention": 330,
+      "High Risk": 0,
+      "Emergency": 120
+    },
+    "confusion_matrix": [
+      [
+        1189,
+        11,
+        0,
+        0
+      ],
+      [
+        75,
+        255,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        119,
+        0,
+        0
+      ]
+    ]
+  },
+  "time_split_test_hybrid": {
+    "macro_f1": 0.446,
+    "per_level_recall": {
+      "Normal": 1.0,
+      "Attention": 0.724,
+      "High Risk": null,
+      "Emergency": 0.0
+    },
+    "support": {
+      "Normal": 1200,
+      "Attention": 330,
+      "High Risk": 0,
+      "Emergency": 120
+    },
+    "confusion_matrix": [
+      [
+        1200,
+        0,
+        0,
+        0
+      ],
+      [
+        91,
+        239,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        5,
+        11,
+        104,
+        0
+      ]
+    ]
+  },
+  "leave_one_astronaut_out_RF_only": {
+    "macro_f1": 0.335,
+    "per_level_recall": {
+      "Normal": 0.975,
+      "Attention": 0.312,
+      "High Risk": null,
+      "Emergency": 0.0
+    },
+    "support": {
+      "Normal": 9886,
+      "Attention": 984,
+      "High Risk": 0,
+      "Emergency": 120
+    },
+    "confusion_matrix": [
+      [
+        9637,
+        249,
+        0,
+        0
+      ],
+      [
+        342,
+        307,
+        158,
+        177
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        119,
+        0,
+        0
+      ]
+    ]
+  },
+  "leave_one_astronaut_out_hybrid": {
+    "macro_f1": 0.356,
+    "per_level_recall": {
+      "Normal": 0.999,
+      "Attention": 0.294,
+      "High Risk": null,
+      "Emergency": 0.0
+    },
+    "support": {
+      "Normal": 9886,
+      "Attention": 984,
+      "High Risk": 0,
+      "Emergency": 120
+    },
+    "confusion_matrix": [
+      [
+        9878,
+        8,
+        0,
+        0
+      ],
+      [
+        466,
+        289,
+        229,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        5,
+        11,
+        104,
+        0
+      ]
+    ]
+  },
+  "weak_label_rules": {
+    "Omar (emergency)": "day>=56 -> Emergency, else Normal",
+    "Sara (attention)": "day>=41 -> Attention (yellow, per the mission contract), else Normal",
+    "Tarek (slow_hr_rise)": "day>=45 -> Attention",
+    "Youssef (transient_fever)": "day 30-34 -> Attention",
+    "others": "Normal"
+  },
+  "limitations": [
+    "Simulated (synthetic) data from Shimaa, with no real labels: the labels are weak, built from the scenario definition and the day (approximate).",
+    "Only one emergency astronaut (Omar), and all emergency days are in the last 5 days: in the time split they all fall in the test set, so the model never sees them in training; the same happens when Omar is left out in leave-one-out.",
+    "There are no real High Risk examples in Shimaa's data (Sara is only yellow per the contract, and Omar goes straight to emergency), so the High Risk level comes from the NEWS points only.",
+    "The hybrid relies on the NEWS points to cover cases the RF has not seen; their thresholds are approximate and not medically validated.",
+    "These numbers show that the code works and the trend makes sense, not real clinical performance. This is a monitoring indicator, not a diagnosis.",
+    "Days 1-14 (calibration) are not evaluated because they have no deviation."
+  ]
+}

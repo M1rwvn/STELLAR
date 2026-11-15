@@ -1,0 +1,123 @@
+rows: 10990 | weak-label share:
+ y
+0    0.8995
+1    0.0895
+3    0.0109
+Name: proportion, dtype: float64
+
+===== VAL (RF only) =====
+              precision    recall  f1-score   support
+
+      Normal       0.94      1.00      0.97      1320
+   Attention       1.00      0.76      0.86       330
+   High Risk       0.00      0.00      0.00         0
+   Emergency       0.00      0.00      0.00         0
+
+    accuracy                           0.95      1650
+   macro avg       0.48      0.44      0.46      1650
+weighted avg       0.95      0.95      0.95      1650
+
+Confusion:
+ [[1319    1    0    0]
+ [  79  251    0    0]
+ [   0    0    0    0]
+ [   0    0    0    0]]
+
+===== VAL (Hybrid) =====
+              precision    recall  f1-score   support
+
+      Normal       0.89      1.00      0.94      1320
+   Attention       1.00      0.53      0.69       330
+   High Risk       0.00      0.00      0.00         0
+   Emergency       0.00      0.00      0.00         0
+
+    accuracy                           0.91      1650
+   macro avg       0.47      0.38      0.41      1650
+weighted avg       0.92      0.91      0.89      1650
+
+Confusion:
+ [[1320    0    0    0]
+ [ 156  174    0    0]
+ [   0    0    0    0]
+ [   0    0    0    0]]
+
+===== TEST (RF only) =====
+              precision    recall  f1-score   support
+
+      Normal       0.94      0.99      0.96      1200
+   Attention       0.66      0.77      0.71       330
+   High Risk       0.00      0.00      0.00         0
+   Emergency       0.00      0.00      0.00       120
+
+    accuracy                           0.88      1650
+   macro avg       0.40      0.44      0.42      1650
+weighted avg       0.82      0.88      0.84      1650
+
+Confusion:
+ [[1189   11    0    0]
+ [  75  255    0    0]
+ [   0    0    0    0]
+ [   1  119    0    0]]
+
+===== TEST (Hybrid) =====
+              precision    recall  f1-score   support
+
+      Normal       0.93      1.00      0.96      1200
+   Attention       0.96      0.72      0.82       330
+   High Risk       0.00      0.00      0.00         0
+   Emergency       0.00      0.00      0.00       120
+
+    accuracy                           0.87      1650
+   macro avg       0.47      0.43      0.45      1650
+weighted avg       0.86      0.87      0.86      1650
+
+Confusion:
+ [[1200    0    0    0]
+ [  91  239    0    0]
+ [   0    0    0    0]
+ [   5   11  104    0]]
+
+===== LOAO (RF only) =====
+              precision    recall  f1-score   support
+
+      Normal       0.97      0.97      0.97      9886
+   Attention       0.45      0.31      0.37       984
+   High Risk       0.00      0.00      0.00         0
+   Emergency       0.00      0.00      0.00       120
+
+    accuracy                           0.90     10990
+   macro avg       0.36      0.32      0.34     10990
+weighted avg       0.91      0.90      0.91     10990
+
+Confusion:
+ [[9637  249    0    0]
+ [ 342  307  158  177]
+ [   0    0    0    0]
+ [   1  119    0    0]]
+
+===== LOAO (Hybrid) =====
+              precision    recall  f1-score   support
+
+      Normal       0.95      1.00      0.98      9886
+   Attention       0.94      0.29      0.45       984
+   High Risk       0.00      0.00      0.00         0
+   Emergency       0.00      0.00      0.00       120
+
+    accuracy                           0.93     10990
+   macro avg       0.47      0.32      0.36     10990
+weighted avg       0.94      0.93      0.92     10990
+
+Confusion:
+ [[9878    8    0    0]
+ [ 466  289  229    0]
+ [   0    0    0    0]
+ [   5   11  104    0]]
+
+===== predict_risk demo =====
+Ahmed (normal) -> {"risk_score": 6, "level": "Normal", "top_factors": [], "recommendation": "Physiological signs are within the astronaut's personal baseline. Continue the planned activity.", "anomaly_score": 0.0}
+Sara (late) -> {"risk_score": 43, "level": "Attention", "top_factors": [{"feature": "stress_score", "change_pct": 92.0}, {"feature": "hr", "change_pct": 10.5}, {"feature": "sleep_hours", "change_pct": -22.0}], "recommendation": "Mild deviation from personal baseline. Monitor the trend, check sleep/stress and consider reducing workload.", "anomaly_score": 0.835}
+Omar (emergency) -> {"risk_score": 94, "level": "Emergency", "top_factors": [{"feature": "spo2", "change_pct": -3.2}, {"feature": "hrv", "change_pct": -35.4}, {"feature": "hr", "change_pct": 28.6}], "recommendation": "Critical deviation (vitals/sleep/stress). Stop activity, alert Ground Control and the medical team immediately.", "anomaly_score": 0.987}
+Missing values -> {"risk_score": 31, "level": "Attention", "top_factors": [{"feature": "hr", "change_pct": 30.0}], "recommendation": "Mild deviation from personal baseline. Monitor the trend, check sleep/stress and consider reducing workload.", "anomaly_score": 0.005}
+Empty -> {"risk_score": 6, "level": "Normal", "top_factors": [], "recommendation": "Physiological signs are within the astronaut's personal baseline. Continue the planned activity.", "anomaly_score": 0.0}
+
+saved: physio_model.joblib + report + 3 plots

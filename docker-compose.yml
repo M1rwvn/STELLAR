@@ -1,0 +1,55 @@
+# docker compose up --build        -> PostgreSQL + API (8000) + Mock API (8001)
+# docker compose --profile demo run --rm replay   -> stream the demo scenarios
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-astro}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-astro_dev_pw}
+      POSTGRES_DB: ${POSTGRES_DB:-stellar}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-astro} -d ${POSTGRES_DB:-stellar}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build: .
+    environment:
+      DATABASE_URL: postgresql+psycopg2://${POSTGRES_USER:-astro}:${POSTGRES_PASSWORD:-astro_dev_pw}@db:5432/${POSTGRES_DB:-stellar}
+      JWT_SECRET: ${JWT_SECRET:-dev-only-secret-change-me}
+      SEED_PASSWORD: ${SEED_PASSWORD:-astro123}
+      CORS_ORIGINS: ${CORS_ORIGINS:-*}
+      AI_MODE: ${AI_MODE:-auto}
+      COMM_DELAY_SECONDS: ${COMM_DELAY_SECONDS:-2}
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  mock:
+    build: .
+    command: ["uvicorn", "app.mock_api:app", "--host", "0.0.0.0", "--port", "8001"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/health', timeout=2)"]
+    ports:
+      - "8001:8001"
+
+  replay:
+    build: .
+    profiles: ["demo"]
+    command: ["python", "scripts/replay.py", "--url", "http://api:8000", "--start-day", "45", "--every-hours", "6", "--interval", "0.3"]
+    environment:
+      SEED_PASSWORD: ${SEED_PASSWORD:-astro123}
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  pgdata:

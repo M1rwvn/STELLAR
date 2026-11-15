@@ -1,0 +1,25 @@
+{
+  "astronaut_id": "AST-001",
+  "timestamp": "2026-11-15T18:44:53Z",
+  "wearable": {
+    "hr": 80,
+    "hrv": 45,
+    "spo2": 97,
+    "resp_rate": 16,
+    "temp": 36.7,
+    "sleep_hours": 4.0,
+    "sleep_quality": 0.5,
+    "activity": 0.1
+  },
+  "suit": {
+    "cabin_pressure_kpa": 101.57,
+    "suit_temp_c": 22.23,
+    "o2_pct": 20.88,
+    "co2_pct": 0.049
+  },
+  "vision": {
+    "posture_score": 0.5,
+    "movement_quality": 0.5,
+    "fatigue_indicator": 0.5
+  }
+}

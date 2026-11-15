@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "astroguardian-digital-twin"
+version = "1.1.0"
+description = "AstroGuardian AI Member 1: personal baselines and deviations for SYNTHETIC astronaut wearable data"
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.26", "pandas>=2.1"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "nbformat", "jupyter"]
+parquet = ["pyarrow"]
+
+[project.scripts]
+astroguardian-demo = "astroguardian_digital_twin.demo_scenarios:main"
+astroguardian-replay = "astroguardian_digital_twin.replay:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

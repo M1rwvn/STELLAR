@@ -1,0 +1,1702 @@
+{
+  "AST-001": {
+    "astronaut_id": "AST-001",
+    "name": "Ahmed",
+    "baseline": {
+      "hr": [
+        56.47,
+        68.33
+      ],
+      "hrv": [
+        51.513,
+        70.787
+      ],
+      "spo2": [
+        96.61,
+        98.39
+      ],
+      "sleep_hours": 6.905,
+      "temp": [
+        36.393,
+        36.987
+      ],
+      "activity": 0.527
+    },
+    "recovery_score": 78,
+    "baseline_detail": {
+      "hr": {
+        "center": 62.4,
+        "low": 56.47,
+        "high": 68.33,
+        "robust_sigma": 2.9652,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "bpm",
+        "status": "ok"
+      },
+      "hrv": {
+        "center": 61.15,
+        "low": 51.513,
+        "high": 70.787,
+        "robust_sigma": 4.8184,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "ms",
+        "status": "ok"
+      },
+      "spo2": {
+        "center": 97.5,
+        "low": 96.61,
+        "high": 98.39,
+        "robust_sigma": 0.4448,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "%",
+        "status": "ok"
+      },
+      "resp_rate": {
+        "center": 14.5,
+        "low": 13.017,
+        "high": 15.983,
+        "robust_sigma": 0.7413,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "breaths/min",
+        "status": "ok"
+      },
+      "temp": {
+        "center": 36.69,
+        "low": 36.393,
+        "high": 36.987,
+        "robust_sigma": 0.1483,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "degC",
+        "status": "ok"
+      },
+      "activity": {
+        "center": 0.527,
+        "low": 0.0,
+        "high": 1.0,
+        "robust_sigma": 0.2743,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "score 0-1",
+        "status": "ok"
+      },
+      "stress_score": {
+        "center": 27.203,
+        "low": 0.0,
+        "high": 57.157,
+        "robust_sigma": 14.9771,
+        "interval_method": "median_mad",
+        "n_samples": 323,
+        "min_samples_required": 168,
+        "unit": "score 0-100",
+        "status": "ok"
+      },
+      "sleep_hours": {
+        "center": 6.905,
+        "low": 6.49,
+        "high": 7.32,
+        "robust_sigma": 0.2076,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "hours/day",
+        "status": "ok"
+      },
+      "sleep_quality": {
+        "center": 0.782,
+        "low": 0.702,
+        "high": 0.863,
+        "robust_sigma": 0.04,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "score 0-1",
+        "status": "ok"
+      },
+      "exercise_score": {
+        "center": 81.25,
+        "low": 77.84,
+        "high": 84.66,
+        "robust_sigma": 1.705,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "score 0-100",
+        "status": "ok"
+      }
+    },
+    "calibration": {
+      "calibration_days": 14,
+      "start": "2026-08-25T00:00:00Z",
+      "end": "2026-09-07T23:00:00Z",
+      "n_rows": 336,
+      "n_days_present": 14,
+      "complete": true,
+      "note": "Only mission days 1..calibration_days were used; later data was ignored."
+    },
+    "online_reference": {
+      "schema_version": "1.1.0",
+      "mission_start": "2026-08-25T00:00:00Z",
+      "calibration_days": 14,
+      "stress": {
+        "hr6_mean": 62.41349800399202,
+        "hr6_scale": 2.1054141516368197,
+        "hrv6_mean": 61.11521956087823,
+        "hrv6_scale": 3.7790501392525777
+      },
+      "feature_config": {
+        "rolling_short_hours": 24,
+        "rolling_long_hours": 168,
+        "rolling_min_periods": 6,
+        "stress_window_hours": 6,
+        "stress_baseline_level": 25.0,
+        "stress_gain": 12.5,
+        "sleep_need_hours": 8.0,
+        "sleep_debt_window_days": 7
+      }
+    },
+    "schema_version": "1.1.0",
+    "synthetic": true,
+    "data_label": "SYNTHETIC DATA - fictional astronaut. Baseline is a monitoring reference, not a medical reference interval or diagnosis."
+  },
+  "AST-002": {
+    "astronaut_id": "AST-002",
+    "name": "Sara",
+    "baseline": {
+      "hr": [
+        59.377,
+        72.423
+      ],
+      "hrv": [
+        44.848,
+        70.052
+      ],
+      "spo2": [
+        95.914,
+        98.286
+      ],
+      "sleep_hours": 7.24,
+      "temp": [
+        36.245,
+        37.015
+      ],
+      "activity": 0.49
+    },
+    "recovery_score": 77,
+    "baseline_detail": {
+      "hr": {
+        "center": 65.9,
+        "low": 59.377,
+        "high": 72.423,
+        "robust_sigma": 3.2617,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "bpm",
+        "status": "ok"
+      },
+      "hrv": {
+        "center": 57.45,
+        "low": 44.848,
+        "high": 70.052,
+        "robust_sigma": 6.3011,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "ms",
+        "status": "ok"
+      },
+      "spo2": {
+        "center": 97.1,
+        "low": 95.914,
+        "high": 98.286,
+        "robust_sigma": 0.593,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "%",
+        "status": "ok"
+      },
+      "resp_rate": {
+        "center": 15.1,
+        "low": 13.024,
+        "high": 17.176,
+        "robust_sigma": 1.0378,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "breaths/min",
+        "status": "ok"
+      },
+      "temp": {
+        "center": 36.63,
+        "low": 36.245,
+        "high": 37.015,
+        "robust_sigma": 0.1927,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "degC",
+        "status": "ok"
+      },
+      "activity": {
+        "center": 0.49,
+        "low": 0.0,
+        "high": 1.0,
+        "robust_sigma": 0.2654,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "score 0-1",
+        "status": "ok"
+      },
+      "stress_score": {
+        "center": 25.875,
+        "low": 4.789,
+        "high": 46.962,
+        "robust_sigma": 10.5432,
+        "interval_method": "median_mad",
+        "n_samples": 323,
+        "min_samples_required": 168,
+        "unit": "score 0-100",
+        "status": "ok"
+      },
+      "sleep_hours": {
+        "center": 7.24,
+        "low": 6.543,
+        "high": 7.937,
+        "robust_sigma": 0.3484,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "hours/day",
+        "status": "ok"
+      },
+      "sleep_quality": {
+        "center": 0.779,
+        "low": 0.629,
+        "high": 0.929,
+        "robust_sigma": 0.0749,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "score 0-1",
+        "status": "ok"
+      },
+      "exercise_score": {
+        "center": 82.9,
+        "low": 74.894,
+        "high": 90.906,
+        "robust_sigma": 4.003,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "score 0-100",
+        "status": "ok"
+      }
+    },
+    "calibration": {
+      "calibration_days": 14,
+      "start": "2026-08-25T00:00:00Z",
+      "end": "2026-09-07T23:00:00Z",
+      "n_rows": 336,
+      "n_days_present": 14,
+      "complete": true,
+      "note": "Only mission days 1..calibration_days were used; later data was ignored."
+    },
+    "online_reference": {
+      "schema_version": "1.1.0",
+      "mission_start": "2026-08-25T00:00:00Z",
+      "calibration_days": 14,
+      "stress": {
+        "hr6_mean": 65.86988023952097,
+        "hr6_scale": 2.4113655473123194,
+        "hrv6_mean": 58.09590818363273,
+        "hrv6_scale": 5.523294156137391
+      },
+      "feature_config": {
+        "rolling_short_hours": 24,
+        "rolling_long_hours": 168,
+        "rolling_min_periods": 6,
+        "stress_window_hours": 6,
+        "stress_baseline_level": 25.0,
+        "stress_gain": 12.5,
+        "sleep_need_hours": 8.0,
+        "sleep_debt_window_days": 7
+      }
+    },
+    "schema_version": "1.1.0",
+    "synthetic": true,
+    "data_label": "SYNTHETIC DATA - fictional astronaut. Baseline is a monitoring reference, not a medical reference interval or diagnosis."
+  },
+  "AST-003": {
+    "astronaut_id": "AST-003",
+    "name": "Omar",
+    "baseline": {
+      "hr": [
+        61.77,
+        73.63
+      ],
+      "hrv": [
+        46.71,
+        65.39
+      ],
+      "spo2": [
+        96.61,
+        98.39
+      ],
+      "sleep_hours": 6.82,
+      "temp": [
+        36.454,
+        37.106
+      ],
+      "activity": 0.603
+    },
+    "recovery_score": 72,
+    "baseline_detail": {
+      "hr": {
+        "center": 67.7,
+        "low": 61.77,
+        "high": 73.63,
+        "robust_sigma": 2.9652,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "bpm",
+        "status": "ok"
+      },
+      "hrv": {
+        "center": 56.05,
+        "low": 46.71,
+        "high": 65.39,
+        "robust_sigma": 4.6702,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "ms",
+        "status": "ok"
+      },
+      "spo2": {
+        "center": 97.5,
+        "low": 96.61,
+        "high": 98.39,
+        "robust_sigma": 0.4448,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "%",
+        "status": "ok"
+      },
+      "resp_rate": {
+        "center": 15.4,
+        "low": 14.214,
+        "high": 16.586,
+        "robust_sigma": 0.593,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "breaths/min",
+        "status": "ok"
+      },
+      "temp": {
+        "center": 36.78,
+        "low": 36.454,
+        "high": 37.106,
+        "robust_sigma": 0.1631,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "degC",
+        "status": "ok"
+      },
+      "activity": {
+        "center": 0.603,
+        "low": 0.104,
+        "high": 1.0,
+        "robust_sigma": 0.2498,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "score 0-1",
+        "status": "ok"
+      },
+      "stress_score": {
+        "center": 26.845,
+        "low": 2.515,
+        "high": 51.174,
+        "robust_sigma": 12.1647,
+        "interval_method": "median_mad",
+        "n_samples": 323,
+        "min_samples_required": 168,
+        "unit": "score 0-100",
+        "status": "ok"
+      },
+      "sleep_hours": {
+        "center": 6.82,
+        "low": 6.005,
+        "high": 7.635,
+        "robust_sigma": 0.4077,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "hours/day",
+        "status": "ok"
+      },
+      "sleep_quality": {
+        "center": 0.708,
+        "low": 0.629,
+        "high": 0.787,
+        "robust_sigma": 0.0393,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "score 0-1",
+        "status": "ok"
+      },
+      "exercise_score": {
+        "center": 85.05,
+        "low": 80.602,
+        "high": 89.498,
+        "robust_sigma": 2.2239,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "score 0-100",
+        "status": "ok"
+      }
+    },
+    "calibration": {
+      "calibration_days": 14,
+      "start": "2026-08-25T00:00:00Z",
+      "end": "2026-09-07T23:00:00Z",
+      "n_rows": 336,
+      "n_days_present": 14,
+      "complete": true,
+      "note": "Only mission days 1..calibration_days were used; later data was ignored."
+    },
+    "online_reference": {
+      "schema_version": "1.1.0",
+      "mission_start": "2026-08-25T00:00:00Z",
+      "calibration_days": 14,
+      "stress": {
+        "hr6_mean": 67.81341317365269,
+        "hr6_scale": 2.2714192932801565,
+        "hrv6_mean": 56.15617764471058,
+        "hrv6_scale": 3.8262650759555834
+      },
+      "feature_config": {
+        "rolling_short_hours": 24,
+        "rolling_long_hours": 168,
+        "rolling_min_periods": 6,
+        "stress_window_hours": 6,
+        "stress_baseline_level": 25.0,
+        "stress_gain": 12.5,
+        "sleep_need_hours": 8.0,
+        "sleep_debt_window_days": 7
+      }
+    },
+    "schema_version": "1.1.0",
+    "synthetic": true,
+    "data_label": "SYNTHETIC DATA - fictional astronaut. Baseline is a monitoring reference, not a medical reference interval or diagnosis."
+  },
+  "AST-004": {
+    "astronaut_id": "AST-004",
+    "name": "Layla",
+    "baseline": {
+      "hr": [
+        60.664,
+        71.636
+      ],
+      "hrv": [
+        39.999,
+        56.901
+      ],
+      "spo2": [
+        96.11,
+        97.89
+      ],
+      "sleep_hours": 6.6,
+      "temp": [
+        36.223,
+        36.817
+      ],
+      "activity": 0.477
+    },
+    "recovery_score": 70,
+    "baseline_detail": {
+      "hr": {
+        "center": 66.15,
+        "low": 60.664,
+        "high": 71.636,
+        "robust_sigma": 2.7428,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "bpm",
+        "status": "ok"
+      },
+      "hrv": {
+        "center": 48.45,
+        "low": 39.999,
+        "high": 56.901,
+        "robust_sigma": 4.2254,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "ms",
+        "status": "ok"
+      },
+      "spo2": {
+        "center": 97.0,
+        "low": 96.11,
+        "high": 97.89,
+        "robust_sigma": 0.4448,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "%",
+        "status": "ok"
+      },
+      "resp_rate": {
+        "center": 14.3,
+        "low": 12.817,
+        "high": 15.783,
+        "robust_sigma": 0.7413,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "breaths/min",
+        "status": "ok"
+      },
+      "temp": {
+        "center": 36.52,
+        "low": 36.223,
+        "high": 36.817,
+        "robust_sigma": 0.1483,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "degC",
+        "status": "ok"
+      },
+      "activity": {
+        "center": 0.477,
+        "low": 0.0,
+        "high": 1.0,
+        "robust_sigma": 0.2936,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "score 0-1",
+        "status": "ok"
+      },
+      "stress_score": {
+        "center": 25.359,
+        "low": 3.346,
+        "high": 47.371,
+        "robust_sigma": 11.0062,
+        "interval_method": "median_mad",
+        "n_samples": 323,
+        "min_samples_required": 168,
+        "unit": "score 0-100",
+        "status": "ok"
+      },
+      "sleep_hours": {
+        "center": 6.6,
+        "low": 6.066,
+        "high": 7.134,
+        "robust_sigma": 0.2669,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "hours/day",
+        "status": "ok"
+      },
+      "sleep_quality": {
+        "center": 0.788,
+        "low": 0.732,
+        "high": 0.844,
+        "robust_sigma": 0.0282,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "score 0-1",
+        "status": "ok"
+      },
+      "exercise_score": {
+        "center": 83.0,
+        "low": 78.552,
+        "high": 87.448,
+        "robust_sigma": 2.2239,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "score 0-100",
+        "status": "ok"
+      }
+    },
+    "calibration": {
+      "calibration_days": 14,
+      "start": "2026-08-25T00:00:00Z",
+      "end": "2026-09-07T23:00:00Z",
+      "n_rows": 336,
+      "n_days_present": 14,
+      "complete": true,
+      "note": "Only mission days 1..calibration_days were used; later data was ignored."
+    },
+    "online_reference": {
+      "schema_version": "1.1.0",
+      "mission_start": "2026-08-25T00:00:00Z",
+      "calibration_days": 14,
+      "stress": {
+        "hr6_mean": 66.26200099800398,
+        "hr6_scale": 2.195616457389654,
+        "hrv6_mean": 48.71986027944112,
+        "hrv6_scale": 3.6665601650433897
+      },
+      "feature_config": {
+        "rolling_short_hours": 24,
+        "rolling_long_hours": 168,
+        "rolling_min_periods": 6,
+        "stress_window_hours": 6,
+        "stress_baseline_level": 25.0,
+        "stress_gain": 12.5,
+        "sleep_need_hours": 8.0,
+        "sleep_debt_window_days": 7
+      }
+    },
+    "schema_version": "1.1.0",
+    "synthetic": true,
+    "data_label": "SYNTHETIC DATA - fictional astronaut. Baseline is a monitoring reference, not a medical reference interval or diagnosis."
+  },
+  "AST-005": {
+    "astronaut_id": "AST-005",
+    "name": "Karim",
+    "baseline": {
+      "hr": [
+        54.066,
+        65.334
+      ],
+      "hrv": [
+        61.429,
+        83.371
+      ],
+      "spo2": [
+        96.512,
+        98.588
+      ],
+      "sleep_hours": 6.915,
+      "temp": [
+        36.523,
+        37.117
+      ],
+      "activity": 0.51
+    },
+    "recovery_score": 83,
+    "baseline_detail": {
+      "hr": {
+        "center": 59.7,
+        "low": 54.066,
+        "high": 65.334,
+        "robust_sigma": 2.8169,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "bpm",
+        "status": "ok"
+      },
+      "hrv": {
+        "center": 72.4,
+        "low": 61.429,
+        "high": 83.371,
+        "robust_sigma": 5.4856,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "ms",
+        "status": "ok"
+      },
+      "spo2": {
+        "center": 97.55,
+        "low": 96.512,
+        "high": 98.588,
+        "robust_sigma": 0.5189,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "%",
+        "status": "ok"
+      },
+      "resp_rate": {
+        "center": 16.7,
+        "low": 15.217,
+        "high": 18.183,
+        "robust_sigma": 0.7413,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "breaths/min",
+        "status": "ok"
+      },
+      "temp": {
+        "center": 36.82,
+        "low": 36.523,
+        "high": 37.117,
+        "robust_sigma": 0.1483,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "degC",
+        "status": "ok"
+      },
+      "activity": {
+        "center": 0.51,
+        "low": 0.0,
+        "high": 1.0,
+        "robust_sigma": 0.2765,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "score 0-1",
+        "status": "ok"
+      },
+      "stress_score": {
+        "center": 26.152,
+        "low": 0.0,
+        "high": 54.243,
+        "robust_sigma": 14.0454,
+        "interval_method": "median_mad",
+        "n_samples": 323,
+        "min_samples_required": 168,
+        "unit": "score 0-100",
+        "status": "ok"
+      },
+      "sleep_hours": {
+        "center": 6.915,
+        "low": 6.233,
+        "high": 7.597,
+        "robust_sigma": 0.341,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "hours/day",
+        "status": "ok"
+      },
+      "sleep_quality": {
+        "center": 0.76,
+        "low": 0.651,
+        "high": 0.87,
+        "robust_sigma": 0.0549,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "score 0-1",
+        "status": "ok"
+      },
+      "exercise_score": {
+        "center": 72.5,
+        "low": 64.79,
+        "high": 80.21,
+        "robust_sigma": 3.8548,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "score 0-100",
+        "status": "ok"
+      }
+    },
+    "calibration": {
+      "calibration_days": 14,
+      "start": "2026-08-25T00:00:00Z",
+      "end": "2026-09-07T23:00:00Z",
+      "n_rows": 336,
+      "n_days_present": 14,
+      "complete": true,
+      "note": "Only mission days 1..calibration_days were used; later data was ignored."
+    },
+    "online_reference": {
+      "schema_version": "1.1.0",
+      "mission_start": "2026-08-25T00:00:00Z",
+      "calibration_days": 14,
+      "stress": {
+        "hr6_mean": 59.942185628742514,
+        "hr6_scale": 2.2708067604891444,
+        "hrv6_mean": 72.38811876247506,
+        "hrv6_scale": 3.9339932466980243
+      },
+      "feature_config": {
+        "rolling_short_hours": 24,
+        "rolling_long_hours": 168,
+        "rolling_min_periods": 6,
+        "stress_window_hours": 6,
+        "stress_baseline_level": 25.0,
+        "stress_gain": 12.5,
+        "sleep_need_hours": 8.0,
+        "sleep_debt_window_days": 7
+      }
+    },
+    "schema_version": "1.1.0",
+    "synthetic": true,
+    "data_label": "SYNTHETIC DATA - fictional astronaut. Baseline is a monitoring reference, not a medical reference interval or diagnosis."
+  },
+  "AST-006": {
+    "astronaut_id": "AST-006",
+    "name": "Nour",
+    "baseline": {
+      "hr": [
+        59.868,
+        71.432
+      ],
+      "hrv": [
+        56.604,
+        74.396
+      ],
+      "spo2": [
+        96.71,
+        98.49
+      ],
+      "sleep_hours": 6.615,
+      "temp": [
+        36.099,
+        36.781
+      ],
+      "activity": 0.55
+    },
+    "recovery_score": 76,
+    "baseline_detail": {
+      "hr": {
+        "center": 65.65,
+        "low": 59.868,
+        "high": 71.432,
+        "robust_sigma": 2.8911,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "bpm",
+        "status": "ok"
+      },
+      "hrv": {
+        "center": 65.5,
+        "low": 56.604,
+        "high": 74.396,
+        "robust_sigma": 4.4478,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "ms",
+        "status": "ok"
+      },
+      "spo2": {
+        "center": 97.6,
+        "low": 96.71,
+        "high": 98.49,
+        "robust_sigma": 0.4448,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "%",
+        "status": "ok"
+      },
+      "resp_rate": {
+        "center": 15.4,
+        "low": 13.621,
+        "high": 17.179,
+        "robust_sigma": 0.8896,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "breaths/min",
+        "status": "ok"
+      },
+      "temp": {
+        "center": 36.44,
+        "low": 36.099,
+        "high": 36.781,
+        "robust_sigma": 0.1705,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "degC",
+        "status": "ok"
+      },
+      "activity": {
+        "center": 0.55,
+        "low": 0.0,
+        "high": 1.0,
+        "robust_sigma": 0.2861,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "score 0-1",
+        "status": "ok"
+      },
+      "stress_score": {
+        "center": 25.408,
+        "low": 0.0,
+        "high": 50.856,
+        "robust_sigma": 12.7242,
+        "interval_method": "median_mad",
+        "n_samples": 323,
+        "min_samples_required": 168,
+        "unit": "score 0-100",
+        "status": "ok"
+      },
+      "sleep_hours": {
+        "center": 6.615,
+        "low": 6.407,
+        "high": 6.823,
+        "robust_sigma": 0.1038,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "hours/day",
+        "status": "ok"
+      },
+      "sleep_quality": {
+        "center": 0.714,
+        "low": 0.629,
+        "high": 0.799,
+        "robust_sigma": 0.0423,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "score 0-1",
+        "status": "ok"
+      },
+      "exercise_score": {
+        "center": 76.8,
+        "low": 69.684,
+        "high": 83.916,
+        "robust_sigma": 3.5582,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "score 0-100",
+        "status": "ok"
+      }
+    },
+    "calibration": {
+      "calibration_days": 14,
+      "start": "2026-08-25T00:00:00Z",
+      "end": "2026-09-07T23:00:00Z",
+      "n_rows": 336,
+      "n_days_present": 14,
+      "complete": true,
+      "note": "Only mission days 1..calibration_days were used; later data was ignored."
+    },
+    "online_reference": {
+      "schema_version": "1.1.0",
+      "mission_start": "2026-08-25T00:00:00Z",
+      "calibration_days": 14,
+      "stress": {
+        "hr6_mean": 65.49312375249501,
+        "hr6_scale": 2.227107465671937,
+        "hrv6_mean": 65.90545908183633,
+        "hrv6_scale": 3.926916489045099
+      },
+      "feature_config": {
+        "rolling_short_hours": 24,
+        "rolling_long_hours": 168,
+        "rolling_min_periods": 6,
+        "stress_window_hours": 6,
+        "stress_baseline_level": 25.0,
+        "stress_gain": 12.5,
+        "sleep_need_hours": 8.0,
+        "sleep_debt_window_days": 7
+      }
+    },
+    "schema_version": "1.1.0",
+    "synthetic": true,
+    "data_label": "SYNTHETIC DATA - fictional astronaut. Baseline is a monitoring reference, not a medical reference interval or diagnosis."
+  },
+  "AST-007": {
+    "astronaut_id": "AST-007",
+    "name": "Youssef",
+    "baseline": {
+      "hr": [
+        49.866,
+        61.134
+      ],
+      "hrv": [
+        36.193,
+        60.507
+      ],
+      "spo2": [
+        97.014,
+        99.386
+      ],
+      "sleep_hours": 6.6,
+      "temp": [
+        36.503,
+        37.037
+      ],
+      "activity": 0.469
+    },
+    "recovery_score": 68,
+    "baseline_detail": {
+      "hr": {
+        "center": 55.5,
+        "low": 49.866,
+        "high": 61.134,
+        "robust_sigma": 2.8169,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "bpm",
+        "status": "ok"
+      },
+      "hrv": {
+        "center": 48.35,
+        "low": 36.193,
+        "high": 60.507,
+        "robust_sigma": 6.0787,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "ms",
+        "status": "ok"
+      },
+      "spo2": {
+        "center": 98.2,
+        "low": 97.014,
+        "high": 99.386,
+        "robust_sigma": 0.593,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "%",
+        "status": "ok"
+      },
+      "resp_rate": {
+        "center": 13.5,
+        "low": 11.424,
+        "high": 15.576,
+        "robust_sigma": 1.0378,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "breaths/min",
+        "status": "ok"
+      },
+      "temp": {
+        "center": 36.77,
+        "low": 36.503,
+        "high": 37.037,
+        "robust_sigma": 0.1334,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "degC",
+        "status": "ok"
+      },
+      "activity": {
+        "center": 0.469,
+        "low": 0.0,
+        "high": 0.96,
+        "robust_sigma": 0.2454,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "score 0-1",
+        "status": "ok"
+      },
+      "stress_score": {
+        "center": 25.457,
+        "low": 0.0,
+        "high": 52.09,
+        "robust_sigma": 13.3163,
+        "interval_method": "median_mad",
+        "n_samples": 323,
+        "min_samples_required": 168,
+        "unit": "score 0-100",
+        "status": "ok"
+      },
+      "sleep_hours": {
+        "center": 6.6,
+        "low": 5.888,
+        "high": 7.312,
+        "robust_sigma": 0.3558,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "hours/day",
+        "status": "ok"
+      },
+      "sleep_quality": {
+        "center": 0.72,
+        "low": 0.635,
+        "high": 0.804,
+        "robust_sigma": 0.0423,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "score 0-1",
+        "status": "ok"
+      },
+      "exercise_score": {
+        "center": 81.8,
+        "low": 73.349,
+        "high": 90.251,
+        "robust_sigma": 4.2254,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "score 0-100",
+        "status": "ok"
+      }
+    },
+    "calibration": {
+      "calibration_days": 14,
+      "start": "2026-08-25T00:00:00Z",
+      "end": "2026-09-07T23:00:00Z",
+      "n_rows": 336,
+      "n_days_present": 14,
+      "complete": true,
+      "note": "Only mission days 1..calibration_days were used; later data was ignored."
+    },
+    "online_reference": {
+      "schema_version": "1.1.0",
+      "mission_start": "2026-08-25T00:00:00Z",
+      "calibration_days": 14,
+      "stress": {
+        "hr6_mean": 55.343617764471055,
+        "hr6_scale": 2.367117855299563,
+        "hrv6_mean": 48.073223552894206,
+        "hrv6_scale": 5.055588247387036
+      },
+      "feature_config": {
+        "rolling_short_hours": 24,
+        "rolling_long_hours": 168,
+        "rolling_min_periods": 6,
+        "stress_window_hours": 6,
+        "stress_baseline_level": 25.0,
+        "stress_gain": 12.5,
+        "sleep_need_hours": 8.0,
+        "sleep_debt_window_days": 7
+      }
+    },
+    "schema_version": "1.1.0",
+    "synthetic": true,
+    "data_label": "SYNTHETIC DATA - fictional astronaut. Baseline is a monitoring reference, not a medical reference interval or diagnosis."
+  },
+  "AST-008": {
+    "astronaut_id": "AST-008",
+    "name": "Dina",
+    "baseline": {
+      "hr": [
+        49.721,
+        61.879
+      ],
+      "hrv": [
+        50.525,
+        71.875
+      ],
+      "spo2": [
+        97.11,
+        98.89
+      ],
+      "sleep_hours": 6.87,
+      "temp": [
+        36.553,
+        37.147
+      ],
+      "activity": 0.474
+    },
+    "recovery_score": 79,
+    "baseline_detail": {
+      "hr": {
+        "center": 55.8,
+        "low": 49.721,
+        "high": 61.879,
+        "robust_sigma": 3.0393,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "bpm",
+        "status": "ok"
+      },
+      "hrv": {
+        "center": 61.2,
+        "low": 50.525,
+        "high": 71.875,
+        "robust_sigma": 5.3374,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "ms",
+        "status": "ok"
+      },
+      "spo2": {
+        "center": 98.0,
+        "low": 97.11,
+        "high": 98.89,
+        "robust_sigma": 0.4448,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "%",
+        "status": "ok"
+      },
+      "resp_rate": {
+        "center": 15.8,
+        "low": 14.317,
+        "high": 17.283,
+        "robust_sigma": 0.7413,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "breaths/min",
+        "status": "ok"
+      },
+      "temp": {
+        "center": 36.85,
+        "low": 36.553,
+        "high": 37.147,
+        "robust_sigma": 0.1483,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "degC",
+        "status": "ok"
+      },
+      "activity": {
+        "center": 0.474,
+        "low": 0.0,
+        "high": 1.0,
+        "robust_sigma": 0.2721,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "score 0-1",
+        "status": "ok"
+      },
+      "stress_score": {
+        "center": 26.313,
+        "low": 0.0,
+        "high": 53.67,
+        "robust_sigma": 13.6782,
+        "interval_method": "median_mad",
+        "n_samples": 323,
+        "min_samples_required": 168,
+        "unit": "score 0-100",
+        "status": "ok"
+      },
+      "sleep_hours": {
+        "center": 6.87,
+        "low": 6.292,
+        "high": 7.448,
+        "robust_sigma": 0.2891,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "hours/day",
+        "status": "ok"
+      },
+      "sleep_quality": {
+        "center": 0.811,
+        "low": 0.728,
+        "high": 0.895,
+        "robust_sigma": 0.0415,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "score 0-1",
+        "status": "ok"
+      },
+      "exercise_score": {
+        "center": 72.35,
+        "low": 67.902,
+        "high": 76.798,
+        "robust_sigma": 2.2239,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "score 0-100",
+        "status": "ok"
+      }
+    },
+    "calibration": {
+      "calibration_days": 14,
+      "start": "2026-08-25T00:00:00Z",
+      "end": "2026-09-07T23:00:00Z",
+      "n_rows": 336,
+      "n_days_present": 14,
+      "complete": true,
+      "note": "Only mission days 1..calibration_days were used; later data was ignored."
+    },
+    "online_reference": {
+      "schema_version": "1.1.0",
+      "mission_start": "2026-08-25T00:00:00Z",
+      "calibration_days": 14,
+      "stress": {
+        "hr6_mean": 56.096017964071855,
+        "hr6_scale": 2.3819224797859584,
+        "hrv6_mean": 61.31901197604791,
+        "hrv6_scale": 4.308153762812285
+      },
+      "feature_config": {
+        "rolling_short_hours": 24,
+        "rolling_long_hours": 168,
+        "rolling_min_periods": 6,
+        "stress_window_hours": 6,
+        "stress_baseline_level": 25.0,
+        "stress_gain": 12.5,
+        "sleep_need_hours": 8.0,
+        "sleep_debt_window_days": 7
+      }
+    },
+    "schema_version": "1.1.0",
+    "synthetic": true,
+    "data_label": "SYNTHETIC DATA - fictional astronaut. Baseline is a monitoring reference, not a medical reference interval or diagnosis."
+  },
+  "AST-009": {
+    "astronaut_id": "AST-009",
+    "name": "Tarek",
+    "baseline": {
+      "hr": [
+        50.578,
+        63.922
+      ],
+      "hrv": [
+        44.841,
+        68.859
+      ],
+      "spo2": [
+        95.514,
+        97.886
+      ],
+      "sleep_hours": 6.52,
+      "temp": [
+        36.603,
+        37.197
+      ],
+      "activity": 0.586
+    },
+    "recovery_score": 76,
+    "baseline_detail": {
+      "hr": {
+        "center": 57.25,
+        "low": 50.578,
+        "high": 63.922,
+        "robust_sigma": 3.3358,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "bpm",
+        "status": "ok"
+      },
+      "hrv": {
+        "center": 56.85,
+        "low": 44.841,
+        "high": 68.859,
+        "robust_sigma": 6.0045,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "ms",
+        "status": "ok"
+      },
+      "spo2": {
+        "center": 96.7,
+        "low": 95.514,
+        "high": 97.886,
+        "robust_sigma": 0.593,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "%",
+        "status": "ok"
+      },
+      "resp_rate": {
+        "center": 13.8,
+        "low": 12.021,
+        "high": 15.579,
+        "robust_sigma": 0.8896,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "breaths/min",
+        "status": "ok"
+      },
+      "temp": {
+        "center": 36.9,
+        "low": 36.603,
+        "high": 37.197,
+        "robust_sigma": 0.1483,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "degC",
+        "status": "ok"
+      },
+      "activity": {
+        "center": 0.586,
+        "low": 0.023,
+        "high": 1.0,
+        "robust_sigma": 0.2817,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "score 0-1",
+        "status": "ok"
+      },
+      "stress_score": {
+        "center": 23.979,
+        "low": 1.552,
+        "high": 46.406,
+        "robust_sigma": 11.2135,
+        "interval_method": "median_mad",
+        "n_samples": 323,
+        "min_samples_required": 168,
+        "unit": "score 0-100",
+        "status": "ok"
+      },
+      "sleep_hours": {
+        "center": 6.52,
+        "low": 5.957,
+        "high": 7.083,
+        "robust_sigma": 0.2817,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "hours/day",
+        "status": "ok"
+      },
+      "sleep_quality": {
+        "center": 0.821,
+        "low": 0.724,
+        "high": 0.919,
+        "robust_sigma": 0.0489,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "score 0-1",
+        "status": "ok"
+      },
+      "exercise_score": {
+        "center": 86.1,
+        "low": 78.984,
+        "high": 93.216,
+        "robust_sigma": 3.5582,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "score 0-100",
+        "status": "ok"
+      }
+    },
+    "calibration": {
+      "calibration_days": 14,
+      "start": "2026-08-25T00:00:00Z",
+      "end": "2026-09-07T23:00:00Z",
+      "n_rows": 336,
+      "n_days_present": 14,
+      "complete": true,
+      "note": "Only mission days 1..calibration_days were used; later data was ignored."
+    },
+    "online_reference": {
+      "schema_version": "1.1.0",
+      "mission_start": "2026-08-25T00:00:00Z",
+      "calibration_days": 14,
+      "stress": {
+        "hr6_mean": 57.38612275449102,
+        "hr6_scale": 2.5838491935914307,
+        "hrv6_mean": 56.51039421157684,
+        "hrv6_scale": 4.472534839123514
+      },
+      "feature_config": {
+        "rolling_short_hours": 24,
+        "rolling_long_hours": 168,
+        "rolling_min_periods": 6,
+        "stress_window_hours": 6,
+        "stress_baseline_level": 25.0,
+        "stress_gain": 12.5,
+        "sleep_need_hours": 8.0,
+        "sleep_debt_window_days": 7
+      }
+    },
+    "schema_version": "1.1.0",
+    "synthetic": true,
+    "data_label": "SYNTHETIC DATA - fictional astronaut. Baseline is a monitoring reference, not a medical reference interval or diagnosis."
+  },
+  "AST-010": {
+    "astronaut_id": "AST-010",
+    "name": "Hana",
+    "baseline": {
+      "hr": [
+        53.964,
+        64.936
+      ],
+      "hrv": [
+        55.529,
+        77.471
+      ],
+      "spo2": [
+        96.314,
+        98.686
+      ],
+      "sleep_hours": 6.58,
+      "temp": [
+        36.334,
+        37.046
+      ],
+      "activity": 0.686
+    },
+    "recovery_score": 74,
+    "baseline_detail": {
+      "hr": {
+        "center": 59.45,
+        "low": 53.964,
+        "high": 64.936,
+        "robust_sigma": 2.7428,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "bpm",
+        "status": "ok"
+      },
+      "hrv": {
+        "center": 66.5,
+        "low": 55.529,
+        "high": 77.471,
+        "robust_sigma": 5.4856,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "ms",
+        "status": "ok"
+      },
+      "spo2": {
+        "center": 97.5,
+        "low": 96.314,
+        "high": 98.686,
+        "robust_sigma": 0.593,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "%",
+        "status": "ok"
+      },
+      "resp_rate": {
+        "center": 15.6,
+        "low": 14.117,
+        "high": 17.083,
+        "robust_sigma": 0.7413,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "breaths/min",
+        "status": "ok"
+      },
+      "temp": {
+        "center": 36.69,
+        "low": 36.334,
+        "high": 37.046,
+        "robust_sigma": 0.1779,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "degC",
+        "status": "ok"
+      },
+      "activity": {
+        "center": 0.686,
+        "low": 0.158,
+        "high": 1.0,
+        "robust_sigma": 0.2639,
+        "interval_method": "median_mad",
+        "n_samples": 336,
+        "min_samples_required": 168,
+        "unit": "score 0-1",
+        "status": "ok"
+      },
+      "stress_score": {
+        "center": 24.445,
+        "low": 4.523,
+        "high": 44.367,
+        "robust_sigma": 9.9611,
+        "interval_method": "median_mad",
+        "n_samples": 323,
+        "min_samples_required": 168,
+        "unit": "score 0-100",
+        "status": "ok"
+      },
+      "sleep_hours": {
+        "center": 6.58,
+        "low": 5.75,
+        "high": 7.41,
+        "robust_sigma": 0.4151,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "hours/day",
+        "status": "ok"
+      },
+      "sleep_quality": {
+        "center": 0.648,
+        "low": 0.568,
+        "high": 0.728,
+        "robust_sigma": 0.04,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "score 0-1",
+        "status": "ok"
+      },
+      "exercise_score": {
+        "center": 80.35,
+        "low": 76.792,
+        "high": 83.908,
+        "robust_sigma": 1.7791,
+        "interval_method": "median_mad",
+        "n_samples": 14,
+        "min_samples_required": 7,
+        "unit": "score 0-100",
+        "status": "ok"
+      }
+    },
+    "calibration": {
+      "calibration_days": 14,
+      "start": "2026-08-25T00:00:00Z",
+      "end": "2026-09-07T23:00:00Z",
+      "n_rows": 336,
+      "n_days_present": 14,
+      "complete": true,
+      "note": "Only mission days 1..calibration_days were used; later data was ignored."
+    },
+    "online_reference": {
+      "schema_version": "1.1.0",
+      "mission_start": "2026-08-25T00:00:00Z",
+      "calibration_days": 14,
+      "stress": {
+        "hr6_mean": 59.38404690618763,
+        "hr6_scale": 2.2916461420055474,
+        "hrv6_mean": 66.08430139720559,
+        "hrv6_scale": 4.529195473733055
+      },
+      "feature_config": {
+        "rolling_short_hours": 24,
+        "rolling_long_hours": 168,
+        "rolling_min_periods": 6,
+        "stress_window_hours": 6,
+        "stress_baseline_level": 25.0,
+        "stress_gain": 12.5,
+        "sleep_need_hours": 8.0,
+        "sleep_debt_window_days": 7
+      }
+    },
+    "schema_version": "1.1.0",
+    "synthetic": true,
+    "data_label": "SYNTHETIC DATA - fictional astronaut. Baseline is a monitoring reference, not a medical reference interval or diagnosis."
+  }
+}

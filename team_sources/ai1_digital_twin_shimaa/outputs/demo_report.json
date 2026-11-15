@@ -1,0 +1,93 @@
+{
+  "seed": 42,
+  "synthetic": true,
+  "cleaning_report": {
+    "rows_in": 14400,
+    "rows_out": 14400,
+    "invalid_astronaut_id_rows": 0,
+    "invalid_timestamp_rows": 0,
+    "rows_before_mission_start_dropped": 0,
+    "duplicate_rows_removed": 0,
+    "missing_values_original": 0,
+    "non_numeric_values": 0,
+    "out_of_range_values": 0,
+    "out_of_range_by_column": {},
+    "imputed_values": 0,
+    "unrecoverable_rows_dropped": 0,
+    "invalid_records_total": 0,
+    "corrected_values": 0
+  },
+  "pattern_checks": {
+    "hr_baseline_centers": {
+      "AST-001": 62.4,
+      "AST-002": 65.9,
+      "AST-003": 67.7
+    },
+    "distinct_baselines": true,
+    "ahmed": {
+      "mean_abs_daily_hr_dev_pct": 0.9214402173913044,
+      "mean_abs_daily_sleep_dev_pct": 3.825,
+      "fraction_hr_within_3_sigma": 1.0
+    },
+    "ahmed_stable": true,
+    "sara": {
+      "blocks_days": [
+        [
+          15,
+          39
+        ],
+        [
+          41,
+          47
+        ],
+        [
+          48,
+          54
+        ],
+        [
+          55,
+          60
+        ]
+      ],
+      "sleep_pct_dev_by_block": [
+        -3.2976,
+        -6.788571428571428,
+        -15.944285714285714,
+        -22.215000000000003
+      ],
+      "hr_pct_dev_by_block": [
+        -0.17929999999999996,
+        5.3897023809523805,
+        7.561309523809524,
+        9.621805555555556
+      ],
+      "activity_pct_dev_by_block": [
+        -1.2335666666666667,
+        -5.768809523809523,
+        -20.90107142857143,
+        -22.847013888888892
+      ]
+    },
+    "sara_progressive": true,
+    "omar": {
+      "last5_mean_pct_dev": {
+        "hr": 28.636000000000003,
+        "hrv": -35.38616666666667,
+        "spo2": -3.2375,
+        "sleep_hours": -34.782
+      },
+      "last5_mean_temp_delta_c": 0.6601666666666667,
+      "day60_mean": {
+        "hr": 93.55,
+        "hrv": 27.804166666666664,
+        "spo2": 93.1875,
+        "temp": 37.69958333333333,
+        "sleep_hours": 3.67
+      },
+      "pre_event_mean_abs_hr_dev_pct": 1.2792378048780488
+    },
+    "omar_emergency_pattern": true,
+    "all_passed": true
+  },
+  "note": "Direction-of-change checks on synthetic scenarios; no risk score is computed here."
+}

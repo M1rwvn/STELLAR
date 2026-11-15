@@ -1,0 +1,62 @@
+﻿STELLAR - prototype
+===================
+
+Learns each astronaut's personal normal (Digital Twin), fuses wearable, suit and camera data, predicts
+health risk before it becomes an emergency, and shows it on the STELLAR Ground Control dashboard.
+Runs on one laptop, offline after the first start.
+
+BEFORE YOU START
+  1) Windows.
+  2) Python 3.11 or newer from https://www.python.org/downloads/
+     Important: tick "Add python.exe to PATH" during the install.
+  3) Internet the first time only (it downloads the libraries, about 3 minutes).
+  Tip: before extracting the zip, right-click it > Properties > tick "Unblock" > OK.
+
+RUN (one double-click)
+  1) Double-click START_PROTOTYPE.bat
+  2) A window "STELLAR - Server" opens. The first time it installs the libraries; wait for it.
+     If Windows asks about the Firewall, click Allow.
+  3) The browser opens STELLAR Ground Control: http://127.0.0.1:8000/dashboard
+  4) A second window "STELLAR - Live data" streams the three astronauts as if live
+     (mission days 45 to 60, about 3 minutes). The screen refreshes every 2 seconds.
+
+STOP: close the two windows "STELLAR - Server" and "STELLAR - Live data".
+RUN AGAIN: double-click START_PROTOTYPE.bat again; it starts with fresh data.
+
+WHAT YOU WILL SEE
+  Ethan Cole    - green (Normal) the whole time.
+  Emily Carter  - slowly yellow (Attention): less sleep, higher heart rate than HER normal.
+  Ryan Mitchell - normal until day 55; early warning (High Risk) on day 56 at 06:00, Emergency at 16:00 + alert.
+  Click an astronaut: health risk / sleep / fatigue rings, reasons, recommendation, current vitals
+  against the personal normal (red = out of range), suit and camera data, risk over time.
+  Alerts: emergency first, "Acknowledge" button.
+  Space-to-ground link: "Simulate 20 s loss of signal"; when the link returns, emergencies go first.
+
+USEFUL LINKS (while the server runs)
+  Dashboard : http://127.0.0.1:8000/dashboard
+  API docs  : http://127.0.0.1:8000/docs     (login: ground / astro123)
+  Health    : http://127.0.0.1:8000/health
+
+IF SOMETHING GOES WRONG
+  "Python 3.11 or newer was not found": install Python with "Add to PATH", then try again.
+  "Something is already running on port 8000": close the old server window, then try again.
+  "Windows protected your PC": click More info > Run anyway, or Unblock the zip (tip above).
+  Empty screen: wait until the "Live data" window starts printing lines.
+  Docker instead: in this folder run  docker compose up --build  then open http://localhost:8000/dashboard
+
+WHAT IS IN THE FOLDER
+  START_PROTOTYPE.bat                 the start button
+  app\                                the STELLAR server (API, database, alerts, NASA space weather)
+  app\static\dashboard.html           the STELLAR Ground Control dashboard
+  ai_modulesstroguardian_digital_twin\   Digital Twin   (Shimaa - AI 1)
+  ai_modules\menna_risk\                   Risk model     (Menna  - AI 2)
+  ai_modules\mariam_cv_fusion\             Data Fusion    (Mariam - AI 3)
+  data\scenarios\                     demo crew data: Ethan, Emily, Ryan (synthetic)
+  data
+asa\                          real NASA space-weather data (OMNIWeb, DONKI)
+  docs\                               technical guide, API contract, ERD, research, demo plan
+  team_sources\                       full source of each AI member's work (not needed to run)
+
+NOTES
+  All data is synthetic. Outputs are monitoring indicators, not medical diagnoses.
+  In the demo, suit telemetry and the daily camera check are simulated on the crew data's timestamps.
